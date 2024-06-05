@@ -1,0 +1,9 @@
+version: "3"
+
+services: 
+  server: 
+    build: ./server/
+    image: sergeivdovenkov/flet-app
+    command: python main.py
+    ports: 
+      - 80:80
