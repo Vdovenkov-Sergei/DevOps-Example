@@ -1,5 +1,7 @@
 ## Implementation of work with GitHub
 
+![](images/github.png)
+
 ### Main tasks
 
 Below are the main tasks that will be implemented in this project.
@@ -10,7 +12,7 @@ Below are the main tasks that will be implemented in this project.
 4. Add automatic testing of the application to the project repositories when _merge_ or _push_ request is made:
     * Tests check the `correct operation of the application's functions`;
     * Tests check the `code formatting` of the application;
-5. Implement one of the branching systems (**GitHub flow**);
+5. Implement one of the branching systems (**GitHub Flow**);
 
 All these tasks involve working with **GitHub Actions** and not only.
 
