@@ -6,7 +6,7 @@ all: main clean
 clean:
 	rm *.o
 main: main.o DynArray.o
-	$(CXX) $(CXXFLAGS) $^ -o $@
+	mkdir bin | $(CXX) $(CXXFLAGS) $^ -o bin/$@.exe
 
 main.o:
 	$(CXX) $(CXXFLAGS) -I $(INCLUDE) -c src/main.cpp
