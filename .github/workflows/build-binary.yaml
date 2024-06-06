@@ -12,7 +12,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
-
       - name: Build binary
         run: |
             cd  ${{ github.workspace }}/DynArray/
@@ -20,6 +19,6 @@ jobs:
       - name: Upload binary artifact
         uses: actions/upload-artifact@v2
         with:
-            name: binary-artefact
-            path:  ${{ github.workspace }}/DynArray/
+            name: build-artifacts
+            path:  ${{ github.workspace }}/DynArray/bin
    
