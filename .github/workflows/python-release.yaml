@@ -1,0 +1,55 @@
+name: Release
+
+on:
+  push:
+    branches: ["master"]
+
+permissions:
+  contents: write
+  packages: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v3
+      with:
+        python-version: '3.10' 
+
+    - name: Build project
+      run: |
+        python -m compileall ./Calculator
+
+    - name: Packing .pyc files into ZIP
+      run: |
+          mkdir pyc-files
+          mv ${{ github.workspace }}/Calculator/__pycache__/*.pyc pyc-files
+          zip -r pyc-files.zip pyc-files
+
+    - name: Create GitHub release
+      id: create_release
+      uses: actions/create-release@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        tag_name: ${{ github.run_number }}
+        release_name: Release ${{ github.run_number }}
+        draft: false
+        prerelease: false
+        body: Automated release
+
+    - name: Upload Release Asset
+      id: upload-release-asset
+      uses: actions/upload-release-asset@v1
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        upload_url: ${{ steps.create_release.outputs.upload_url }}
+        asset_path: ./pyc-files.zip
+        asset_name: pyc-files.zip
+        asset_content_type: application/zip
